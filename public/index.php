@@ -136,7 +136,7 @@ $app->map(['GET'], '/', function (Request $request, Response $response, array $a
  *
  * This route retrieves a blog article by its slug and renders it.
  */
-$app->map(['GET'], '/item/{slug}', function (Request $request, Response $response, array $args) {
+$app->map(['GET'], '/article/{slug}', function (Request $request, Response $response, array $args) {
     $view = $this->get('view');
     return $view->render(
         $response,
@@ -144,6 +144,21 @@ $app->map(['GET'], '/item/{slug}', function (Request $request, Response $respons
         ['item' => $this->get('articles')->findItemBySlug($args['slug'])]
     );
 });
+
+/**
+ * Define a route to view a blog article.
+ *
+ * This route retrieves a blog article by its slug and renders it.
+ */
+$app->map(['GET'], '/section/{slug}', function (Request $request, Response $response, array $args) {
+    $view = $this->get('view');
+    return $view->render(
+        $response,
+        'section.html.twig',
+        ['item' => $this->get('articles')->findItemBySlug($args['slug'])]
+    );
+});
+
 
 /**
  * Boot the application

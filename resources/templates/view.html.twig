@@ -1,34 +1,54 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/styles.css" rel="stylesheet">
-    <title>{{ item.title }} | Slim Framework Markdown Blog</title>
+    <meta charset="utf-8">
+    <title>{{ item.title }} - BarraHome.org :~#</title>
+    <meta name="description" content="{{ item.title }} - BarraHome.org :~#">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow"> 
+    <link rel="dns-prefetch" href="https://cdn.barrahome.org/" />
+    <link rel="preconnect" href="https://cdn.barrahome.org/" crossorigin />
+    <link rel="shortcut icon" href="https://cdn.barrahome.org/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/terminal.min.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/animate.min.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/console.min.css" media="all" />
 </head>
-<body>
-<header class="grid grid-cols-2 gap-2 mb-2 md:mb-4">
-    <div class="text-left">
-        <a href="/" class="text-sm md:text-base text-stone-800 font-bold no-underline hover:underline transition ease-in-out delay-150 duration-300 underline-offset-4 decoration-2">Slim Framework Markdown Blog</a>
+
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav terminal-nav-sticky">
+            <header class="terminal-logo">
+                <div class="logo terminal-prompt"><a href="/" class="no-style site-name">/home/alberto</a>:~#</div>
+            </header>
+            <nav class="terminal-menu">
+                <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                    <li><a href="/" typeof="ListItem">Inicio</a>/</li>
+                    <li><a href="/section/projects" typeof="ListItem">Proyectos</a>/</li>
+                    <li><a href="/section/contact" typeof="ListItem">Contacto</a>/</li>
+                </ul>
+            </nav>
+        </div>
     </div>
-    <div class="text-right">
-        <a href="/" title="Back to the home page" class="text-sm md:text-base text-stone-500 hover:underline hover:text-stone-600">&larr; Back to the home page</a>
+
+    <div class="container">
+        <!-- Main Page -->
+        <section>
+            <h1>{{ item.title }}</h1>
+            Publicado el: {{ item.publishDate|format_datetime(pattern="dd.MM.Y") }}
+            <br />
+            Etiquetas: {% for tags in item.tags %}
+                <a href="/tag/{{ tags }}">{{ tags }}</a> 
+            {% endfor %}
+            <br /><br />     
+            <h2>Sumario</h2>   
+                {{ item.synopsis }}
+            <br /><br />
+                {{ item.content|raw }}
+        </section>            
+        <!-- / Main Page -->
+        <div class="footer">
+            Powered by <a href="/section/projects">RCFI</a> - © - 2002 - {{ 'now' | date('Y') }} - <a href="/section/credits">Créditos</a> - <a href="/section/legal">Legal</a> - Hosted at <a href="https://www.rackspace.com/">Rackspace Technology</a>
+        </div>
     </div>
-</header>
-<div class="content border-t-4 border-slate-700 pt-2 md:pt-6 mt-4">
-    <h1 class="mb-0 pb-0">{{ item.title }}</h1>
-    <p class="border-slate-700 font-bold mt-2 pt-0 pb-2 md:pb-2 mb-2">By Matthew Setter, {{ item.publishDate|format_datetime(pattern="dd.MM.Y") }}</p>
-    <img src="/images/posts/{{ item.image }}" class="rounded-lg mb-4">
-    <p class="synopsis">{{ item.synopsis }}</p>
-    {{ item.content|raw }}
-</div>
-<footer>
-   <p>&copy; Matthew Setter.
-      <a href="/impressum">Impressum</a>.
-      <a href="/privacy-policy">Privacy Policy</a>.
-      <a href="/terms-of-use">Terms of Use</a>.
-      <a href="/disclaimer">Disclaimer</a>
-   </p>
-</footer>
 </body>
 </html>

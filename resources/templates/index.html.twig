@@ -1,32 +1,59 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/styles.css" rel="stylesheet">
-    <title>Slim Framework Markdown Blog</title>
+    <meta charset="utf-8">
+    <title>BarraHome.org :~#</title>
+    <meta name="description" content="BarraHome.org :~#">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow"> 
+    <link rel="dns-prefetch" href="https://cdn.barrahome.org/" />
+    <link rel="preconnect" href="https://cdn.barrahome.org/" crossorigin />
+    <link rel="shortcut icon" href="https://cdn.barrahome.org/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/terminal.min.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/animate.min.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.barrahome.org/css/barrahome/console.min.css" media="all" />
 </head>
-<body>
-<h1 class="mb-0">Slim Framework Markdown Blog</h1>
-<p class="lead">A blog about software development in PHP, Testing, DevOps, and more.</p>
-<h2 class="homepage">Latest Posts</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4 sm:gap-y-8">
-    {% for item in items %}
-        <div>
-            <a class="no-underline transition duration-500 ease-in-out transform hover:underline"
-               href="/item/{{ item.slug }}"><img src="/images/posts/{{ item.image }}" class="rounded-lg"></a>
-            <a class="no-underline" href="/item/{{ item.slug }}"><h3>{{ item.title }}</h3></a>
-            {{ item.publishDate|format_datetime(pattern="dd.MM.Y") }}
+
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav terminal-nav-sticky">
+            <header class="terminal-logo">
+                <div class="logo terminal-prompt"><a href="/" class="no-style site-name">/home/alberto</a>:~#</div>
+            </header>
+            <nav class="terminal-menu">
+                <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                    <li><a href="/" typeof="ListItem">Inicio</a>/</li>
+                    <li><a href="/section/projects" typeof="ListItem">Proyectos</a>/</li>
+                    <li><a href="/section/contact" typeof="ListItem">Contacto</a>/</li>
+                </ul>
+            </nav>
         </div>
-    {% endfor %}
-</div>
-<footer>
-   <p>&copy; Matthew Setter.
-      <a href="/impressum">Impressum</a>.
-      <a href="/privacy-policy">Privacy Policy</a>.
-      <a href="/terms-of-use">Terms of Use</a>.
-      <a href="/disclaimer">Disclaimer</a>
-   </p>
-</footer>
+    </div>
+
+    <div class="container">
+        <!-- Main Page -->
+        <section>
+            <h1>Sobre este blog:</h1>
+            Bienvenidos, mi nombre es Alberto Ferrer, este proyecto, sitio web y todas sus versiones nacieron con la necesidad de expresar ideas, comentarios, compartir enseñanzas y continuará a lo largo de los años siendo una fuente de conocimiento en constante evolución.<a href="/section/contact">(más)</a>
+            <h1>Últimas entradas:</h1>
+            <div class="posts-list">
+                {% for item in items %}
+                <div class="post">
+                    <p>
+                        <div class="date">{{ item.publishDate|format_datetime(pattern="dd.MM.Y") }}</div>
+                        <h1>
+                            <a href="/article/{{ item.slug }}" title="{{ item.title }}">{{ item.title }}</a>
+                        </h1>
+                        {{ item.synopsis }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <!-- / Main Page -->
+        <div class="footer">
+            Powered by <a href="/section/projects">RCFI</a> - © - 2002 - {{ 'now' | date('Y') }} - <a href="/section/credits">Créditos</a> - <a href="/section/legal">Legal</a> - Hosted at <a href="https://www.rackspace.com/">Rackspace Technology</a>
+        </div>
+    </div>
 </body>
 </html>
